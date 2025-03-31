@@ -6,6 +6,8 @@ import { urlFor } from "@/lib/sanity";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 async function getData() {
   const query = `
  *[_type == 'blog'] | order(_createdAt desc){
@@ -16,8 +18,6 @@ async function getData() {
 }`;
   return await client.fetch(query);
 }
-
-export const revalidate = 60;
 
 export default async function Home() {
   const data: simpleBlogCard[] = await getData();

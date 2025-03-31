@@ -4,6 +4,8 @@ import Image from "next/image";
 import { client } from "@/lib/sanity";
 import { PortableText } from "next-sanity";
 
+export const revalidate = 60;
+
 async function getData(slug: string) {
   const query = `
  *[_type == "blog" && slug.current == $slug]{
@@ -16,8 +18,6 @@ async function getData(slug: string) {
   const data = await client.fetch(query, { slug });
   return data;
 }
-
-export const revalidate = 60;
 
 export default async function BlogArticle({
   params,
