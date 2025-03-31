@@ -6,7 +6,7 @@ import { urlFor } from "@/lib/sanity";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export async function getData() {
+async function getData() {
   const query = `
  *[_type == 'blog'] | order(_createdAt desc){
   title,
