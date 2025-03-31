@@ -29,7 +29,7 @@ export default async function Home() {
             alt="image"
             width={500}
             height={500}
-            className="rounded-lg h-[200px] object-cover"
+            className="rounded-lg h-[200px] object-contain"
           />
           <CardContent>
             <h2 className="text-2xl font-bold line-clamp-2  ">{post.title}</h2>

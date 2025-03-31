@@ -1,3 +1,5 @@
+import { SanityAsset } from "@sanity/image-url/lib/types/types";
+
 export interface simpleBlogCard {
   title: string;
   slug: string;
@@ -6,7 +8,9 @@ export interface simpleBlogCard {
   titleImage: any;
 }
 
-export interface blogCard extends simpleBlogCard {
-  content: string;
+export interface fullBlog {
   currentSlug: string;
+  title: string;
+  content: SanityAsset;
+  titleImage: any;
 }

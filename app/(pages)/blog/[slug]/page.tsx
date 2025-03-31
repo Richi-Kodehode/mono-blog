@@ -1,3 +1,46 @@
-export default function BlogArticle({ params }: { params: { slug: string } }) {
-  return <h1>{params.slug}</h1>;
+import { fullBlog } from "@/lib/interface";
+import { urlFor } from "@/lib/sanity";
+import Image from "next/image";
+import { client } from "@/lib/sanity";
+import { PortableText } from "next-sanity";
+
+async function getData(slug: string) {
+  const query = `
+ *[_type == "blog" && slug.current == $slug]{
+  "currentSlug": slug.current,
+  title,
+  content,
+  titleImage
+  }[0]`;
+
+  const data = await client.fetch(query, { slug });
+  return data;
+}
+
+export default async function BlogArticle({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const data: fullBlog = await getData(params.slug);
+
+  return (
+    <div className="flex flex-col mt-5 gap-5">
+      <div>
+        <h2 className="text-2xl font-bold line-clamp-2  ">{data.title}</h2>
+      </div>
+      <div className="flex justify-center">
+        <Image
+          src={urlFor(data.titleImage).url()}
+          alt="image"
+          width={500}
+          height={500}
+          className="rounded-lg h-[200px] object-cover"
+        />
+      </div>
+      <div className="flex flex-col gap-5">
+        <PortableText value={data.content} />
+      </div>
+    </div>
+  );
 }
