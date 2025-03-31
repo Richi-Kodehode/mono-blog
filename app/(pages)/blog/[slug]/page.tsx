@@ -20,9 +20,10 @@ async function getData(slug: string) {
 export default async function BlogArticle({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const data: fullBlog = await getData(params.slug);
+  const { slug } = await params;
+  const data: fullBlog = await getData(slug);
 
   return (
     <div className="flex flex-col mt-5 gap-5">

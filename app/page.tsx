@@ -17,6 +17,8 @@ export async function getData() {
   return await client.fetch(query);
 }
 
+export const revalidate = 60;
+
 export default async function Home() {
   const data: simpleBlogCard[] = await getData();
 
