@@ -4,7 +4,7 @@ import Image from "next/image";
 import { client } from "@/lib/sanity";
 import { PortableText } from "next-sanity";
 
-export const revalidate = 30;
+export const revalidate = 30; // revalidate this page every 30 seconds
 
 async function getData(slug: string) {
   const query = `
